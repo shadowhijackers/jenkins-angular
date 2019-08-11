@@ -1,15 +1,14 @@
-pipeline {
-    agent { node { label 'shadowHijackers' } }
-    options {
-            skipStagesAfterUnstable()
-    }
-    stages {
-        stage('Build') {
-            steps {
-                git 'https://github.com/shadowhijackers/jenkins-angular.git'
-                sh "npm i"
-                sh "sudo ng build --prod"
-            }
+node {
+        stage("----- Checkout -----") {
+            git 'https://github.com/shadowhijackers/jenkins-angular.git'
         }
-    }
+
+        stage("----- Preparation -----"){
+             sh "npm i"
+        }
+
+        stage("----- Build ----------") {
+                sh "sudo ng build --prod"
+        }
+
 }

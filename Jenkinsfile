@@ -4,19 +4,11 @@ pipeline {
             skipStagesAfterUnstable()
     }
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/shadowhijackers/jenkins-angular.git'
-            }
-        }
-        stage('Prepare') {
-            steps {
-               sh "npm i"
-            }
-        }
         stage('Build') {
             steps {
-               sh "sudo ng build --prod"
+                git 'https://github.com/shadowhijackers/jenkins-angular.git'
+                sh "npm i"
+                sh "sudo ng build --prod"
             }
         }
     }
